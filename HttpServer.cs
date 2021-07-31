@@ -9,7 +9,8 @@ using SimpleJSON;
 namespace Geomancer {
   public class HttpServer {
     public static void Main(string[] args) {
-      SimpleListenerExample(new string[] {"http://127.0.0.1:8080/"});
+      SimpleListenerExample(
+          new [] {"http://localhost:8000/", "http://127.0.0.1:8000/"});
     }
     
     // This example requires the System and System.Net namespaces.
@@ -72,10 +73,11 @@ namespace Geomancer {
       HttpListenerContext startRequestContext = listener.GetContext();
       HttpListenerRequest startRequest = startRequestContext.Request;
       var startRequestStr = new StreamReader(startRequest.InputStream).ReadToEnd();
+      Console.WriteLine("Got request:\n" + startRequestStr);
       var startRequestNode = JSONObject.Parse(startRequestStr);
       var startRequestObj = JsonHarvester.ExpectObject(startRequestNode, "Request must be an object!");
-      var startRequestType = JsonHarvester.ExpectMemberString(startRequestObj, "request");
-      if (startRequestType != "start") {
+      var startRequestType = JsonHarvester.ExpectMemberString(startRequestObj, "event_type");
+      if (startRequestType != "Start") {
         throw new Exception("First request must be start!");
       }
       var gameToDominoConnection = new GameToDominoConnection();
@@ -83,8 +85,8 @@ namespace Geomancer {
           new EditorServer(
               System.IO.Directory.GetCurrentDirectory(),
               gameToDominoConnection,
-              JsonHarvester.ExpectMemberInteger(startRequestObj, "screenGW"),
-              JsonHarvester.ExpectMemberInteger(startRequestObj, "screenGH"));
+              JsonHarvester.ExpectMemberInteger(startRequestObj, "screen_grid_width"),
+              JsonHarvester.ExpectMemberInteger(startRequestObj, "screen_grid_height"));
       Respond(startRequestContext, gameToDominoConnection);
       return (editor, gameToDominoConnection);
     }
@@ -97,18 +99,19 @@ namespace Geomancer {
       HttpListenerContext requestContext = listener.GetContext();
       HttpListenerRequest request = requestContext.Request;
       var requestStr = new StreamReader(request.InputStream).ReadToEnd();
+      Console.WriteLine("Got request:\n" + requestStr);
       var requestNode = JSONObject.Parse(requestStr);
       var requestObj = JsonHarvester.ExpectObject(requestNode, "Request must be an object!");
       var requestType = JsonHarvester.ExpectMemberString(requestObj, "request");
       bool keepRunning = true;
       switch (requestType) {
-        case "setHoveredLocation":
+        case "SetHoveredLocation":
           HandleSetHoveredLocation(server, requestObj);
           break;
-        case "locationMouseDown":
+        case "LocationMouseDown":
           HandleLocationMouseDown(server, requestObj);
           break;
-        case "keyDown":
+        case "KeyDown":
           HandleKeyDown(server, requestObj);
           break;
         default:
@@ -124,7 +127,7 @@ namespace Geomancer {
         EditorServer server,
         JSONObject requestObj) {
       server.SetHoveredLocation(
-          JsonHarvester.ExpectMemberULong(requestObj, "tileId"),
+          JsonHarvester.ExpectMemberULong(requestObj, "tile_id"),
           JsonHarvester.GetMaybeMemberLocation(requestObj, "location", out var loc) ? loc : null);
     }
 
@@ -132,7 +135,7 @@ namespace Geomancer {
         EditorServer server,
         JSONObject requestObj) {
       server.LocationMouseDown(
-          JsonHarvester.ExpectMemberULong(requestObj, "tileId"),
+          JsonHarvester.ExpectMemberULong(requestObj, "tile_id"),
           JsonHarvester.ExpectMemberLocation(requestObj, "location"));
     }
     
@@ -141,11 +144,11 @@ namespace Geomancer {
         JSONObject requestObj) {
       server.KeyDown(
           JsonHarvester.ExpectMemberInteger(requestObj, "unicode"),
-          JsonHarvester.ExpectMemberBoolean(requestObj, "leftShiftDown"),
-          JsonHarvester.ExpectMemberBoolean(requestObj, "rightShiftDown"),
-          JsonHarvester.ExpectMemberBoolean(requestObj, "ctrlDown"),
-          JsonHarvester.ExpectMemberBoolean(requestObj, "leftAltDown"),
-          JsonHarvester.ExpectMemberBoolean(requestObj, "rightAltDown"));
+          JsonHarvester.ExpectMemberBoolean(requestObj, "left_shift_down"),
+          JsonHarvester.ExpectMemberBoolean(requestObj, "right_shift_down"),
+          JsonHarvester.ExpectMemberBoolean(requestObj, "ctrl_down"),
+          JsonHarvester.ExpectMemberBoolean(requestObj, "left_alt_down"),
+          JsonHarvester.ExpectMemberBoolean(requestObj, "right_alt_down"));
     }
   }
 }

@@ -22,11 +22,11 @@ namespace GeomancerServer {
     }
     public static JSONObject ToJson(this PatternTile obj) { 
       var json = new JSONObject();
-      json.Add("shapeIndex", obj.shapeIndex);
-      json.Add("rotateRadianards", obj.rotateRadianards);
+      json.Add("shape_index", obj.shapeIndex);
+      json.Add("rotate_radianards", obj.rotateRadianards);
       json.Add("translate", obj.translate.ToJson());
-      json.Add("sideIndexToSideAdjacencies", obj.sideIndexToSideAdjacencies.ToJson());
-      json.Add("cornerIndexToCornerAdjacencies", obj.cornerIndexToCornerAdjacencies.ToJson());
+      json.Add("side_index_to_side_adjacencies", obj.sideIndexToSideAdjacencies.ToJson());
+      json.Add("corner_index_to_corner_adjacencies", obj.cornerIndexToCornerAdjacencies.ToJson());
       return json;
     }
     public static JSONArray ToJson(this PatternSideAdjacencyImmList obj) {
@@ -38,10 +38,10 @@ namespace GeomancerServer {
     }
     public static JSONObject ToJson(this PatternSideAdjacency obj) {
       var json = new JSONObject();
-      json.Add("groupRelativeX", obj.groupRelativeX);
-      json.Add("groupRelativeY", obj.groupRelativeY);
-      json.Add("tileIndex", obj.tileIndex);
-      json.Add("sideIndex", obj.sideIndex);
+      json.Add("group_relative_x", obj.groupRelativeX);
+      json.Add("group_relative_y", obj.groupRelativeY);
+      json.Add("tile_index", obj.tileIndex);
+      json.Add("side_index", obj.sideIndex);
       return json;
     }
     public static JSONArray ToJson(this PatternCornerAdjacencyImmListImmList obj) {
@@ -60,10 +60,10 @@ namespace GeomancerServer {
     }
     public static JSONObject ToJson(this PatternCornerAdjacency obj) {
       var json = new JSONObject();
-      json.Add("groupRelativeX", obj.groupRelativeX);
-      json.Add("groupRelativeY", obj.groupRelativeY);
-      json.Add("tileIndex", obj.tileIndex);
-      json.Add("cornerIndex", obj.cornerIndex);
+      json.Add("group_relative_x", obj.groupRelativeX);
+      json.Add("group_relative_y", obj.groupRelativeY);
+      json.Add("tile_index", obj.tileIndex);
+      json.Add("corner_index", obj.cornerIndex);
       return json;
     }
 
@@ -72,10 +72,10 @@ namespace GeomancerServer {
     public static JSONObject ToJson(this Pattern obj) {
       var json = new JSONObject();
       json.Add("name", obj.name);
-      json.Add("xOffset", obj.xOffset.ToJson());
-      json.Add("yOffset", obj.yOffset.ToJson());
-      json.Add("shapeIndexToCorners", obj.shapeIndexToCorners.ToJson());
-      json.Add("patternTiles", obj.patternTiles.ToJson());
+      json.Add("x_offset", obj.xOffset.ToJson());
+      json.Add("y_offset", obj.yOffset.ToJson());
+      json.Add("shape_index_to_corners", obj.shapeIndexToCorners.ToJson());
+      json.Add("pattern_tiles", obj.patternTiles.ToJson());
       return json;
     }
     
@@ -116,9 +116,9 @@ namespace GeomancerServer {
     
     public static JSONObject ToJson(this Location obj) {
       var json = new JSONObject();
-      json.Add("groupX", obj.groupX);
-      json.Add("groupY", obj.groupY);
-      json.Add("indexInGroup", obj.indexInGroup);
+      json.Add("group_x", obj.groupX);
+      json.Add("group_y", obj.groupY);
+      json.Add("index_in_group", obj.indexInGroup);
       return json;
     }
     public static JSONObject ToJson(this Vec4i obj) {
@@ -135,24 +135,24 @@ namespace GeomancerServer {
       }
       if (anim is ConstantVec4iAnimation constant) {
         var json = new JSONObject();
-        json.Add("type", "constant");
+        json.Add("Vec4iAnimation", "ConstantVec4iAnimation");
         json.Add("val", constant.vec.ToJson());
         return json;
       } else if (anim is AddVec4iAnimation add) {
         var json = new JSONObject();
-        json.Add("type", "add");
+        json.Add("Vec4iAnimation", "AddVec4iAnimation");
         json.Add("left", add.left.ToJson());
         json.Add("right", add.right.ToJson());
         return json;
       } else if (anim is MultiplyVec4iAnimation multiply) {
         var json = new JSONObject();
-        json.Add("type", "multiply");
+        json.Add("Vec4iAnimation", "MultiplyVec4iAnimation");
         json.Add("left", multiply.left.ToJson());
         json.Add("right", multiply.right.ToJson());
         return json;
       } else if (anim is DivideVec4iAnimation divide) {
         var json = new JSONObject();
-        json.Add("type", "divide");
+        json.Add("Vec4iAnimation", "DivideVec4iAnimation");
         json.Add("left", divide.left.ToJson());
         json.Add("right", divide.right.ToJson());
         return json;
@@ -163,7 +163,7 @@ namespace GeomancerServer {
     }
     public static JSONNode ToJson(this SymbolId obj) {
       var json = new JSONObject();
-      json.Add("fontName", obj.fontName);
+      json.Add("font_name", obj.fontName);
       json.Add("unicode", obj.unicode);
       return json;
     }
@@ -172,7 +172,7 @@ namespace GeomancerServer {
         return JSONNull.CreateOrGet();
       }
       var json = new JSONObject();
-      json.Add("symbolId", obj.symbolId.ToJson());
+      json.Add("symbol_id", obj.symbolId.ToJson());
       json.Add("color", obj.color.ToJson());
       return json;
     }
@@ -203,7 +203,7 @@ namespace GeomancerServer {
         return JSONNull.CreateOrGet();
       }
       var json = new JSONObject();
-      json.Add("depthPercent", obj.depthPercent);
+      json.Add("depth_percent", obj.depthPercent);
       json.Add("color", obj.color.ToJson());
       return json;
     }
@@ -215,8 +215,8 @@ namespace GeomancerServer {
       json.Add("glyph", obj.glyph.ToJson());
       json.Add("outline", obj.outline.ToJson());
       json.Add("sides", obj.sides.ToJson());
-      json.Add("rotationDegrees", obj.rotationDegrees);
-      json.Add("sizePercent", obj.sizePercent);
+      json.Add("rotation_degrees", obj.rotationDegrees);
+      json.Add("size_percent", obj.sizePercent);
       return json;
     }
     public static JSONNode ToJson(this InitialUnit obj) {
@@ -227,180 +227,180 @@ namespace GeomancerServer {
       json.Add("location", obj.location.ToJson());
       json.Add("domino", obj.dominoSymbol.ToJson());
       json.Add("face", obj.faceSymbol.ToJson());
-      json.Add("idToDetailSymbol", obj.idToDetailSymbol.ToJson());
-      json.Add("hpRatio", obj.hpRatio);
-      json.Add("mpRatio", obj.mpRatio);
+      json.Add("id_to_detail_symbol", obj.idToDetailSymbol.ToJson());
+      json.Add("hp_ratio", obj.hpRatio);
+      json.Add("mp_ratio", obj.mpRatio);
       return json;
     }
     public static JSONObject ToJson(this InitialTile obj) {
       var json = new JSONObject();
       json.Add("location", obj.location.ToJson());
       json.Add("elevation", obj.elevation);
-      json.Add("topColor", obj.topColor.ToJson());
-      json.Add("sideColor", obj.sideColor.ToJson());
-      json.Add("maybeOverlaySymbol", obj.maybeOverlaySymbol.ToJson());
-      json.Add("maybeFeatureSymbol", obj.maybeFeatureSymbol.ToJson());
-      json.Add("itemIdToSymbol", obj.itemIdToSymbol.ToJson());
+      json.Add("top_color", obj.topColor.ToJson());
+      json.Add("side_color", obj.sideColor.ToJson());
+      json.Add("maybe_overlay_symbol", obj.maybeOverlaySymbol.ToJson());
+      json.Add("maybe_feature_symbol", obj.maybeFeatureSymbol.ToJson());
+      json.Add("item_id_to_symbol", obj.itemIdToSymbol.ToJson());
       return json;
     }
 
     public static JSONObject ToJson(this SetupGameMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "SetupGame");
-      json.Add("lookAt", obj.cameraPosition.ToJson());
-      json.Add("lookAtOffsetToCamera", obj.lookatOffsetToCamera.ToJson());
-      json.Add("elevationStepHeight", new JSONNumber(obj.elevationStepHeight));
+      json.Add("command_type", "SetupGame");
+      json.Add("look_at", obj.cameraPosition.ToJson());
+      json.Add("look_at_offset_to_camera", obj.lookatOffsetToCamera.ToJson());
+      json.Add("elevation_step_height", new JSONNumber(obj.elevationStepHeight));
       json.Add("pattern", obj.pattern.ToJson());
       return json;
     }
 
     public static JSONObject ToJson(this MakePanelMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "MakePanel");
+      json.Add("command_type", "MakePanel");
       json.Add("id", obj.id);
-      json.Add("panelGXInScreen", obj.panelGXInScreen);
-      json.Add("panelGYInScreen", obj.panelGYInScreen);
-      json.Add("panelGW", obj.panelGW);
-      json.Add("panelGH", obj.panelGH);
+      json.Add("panel_grid_x_in_screen", obj.panelGXInScreen);
+      json.Add("panel_grid_y_in_screen", obj.panelGYInScreen);
+      json.Add("panel_grid_width", obj.panelGW);
+      json.Add("panel_grid_height", obj.panelGH);
       return json;
     }
 
     public static JSONObject ToJson(this CreateTileMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "CreateTile");
-      json.Add("tileId", obj.newTileId);
-      json.Add("initialTile", obj.initialTile.ToJson());
+      json.Add("command_type", "CreateTile");
+      json.Add("tile_id", obj.newTileId);
+      json.Add("initial_tile", obj.initialTile.ToJson());
       return json;
     }
 
     public static JSONObject ToJson(this DestroyTileMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "DestroyTile");
-      json.Add("tileId", obj.tileViewId);
+      json.Add("command_type", "DestroyTile");
+      json.Add("tile_id", obj.tileViewId);
       return json;
     }
 
     public static JSONObject ToJson(this SetSurfaceColorMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "SetSurfaceColor");
-      json.Add("tileId", obj.tileViewId);
+      json.Add("command_type", "SetSurfaceColor");
+      json.Add("tile_id", obj.tileViewId);
       json.Add("color", obj.frontColor.ToJson());
       return json;
     }
 
     public static JSONObject ToJson(this SetCliffColorMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "SetCliffColor");
-      json.Add("tileId", obj.tileViewId);
+      json.Add("command_type", "SetCliffColor");
+      json.Add("tile_id", obj.tileViewId);
       json.Add("color", obj.sideColor.ToJson());
       return json;
     }
 
     public static JSONObject ToJson(this AddRectangleMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "AddRectangle");
-      json.Add("newViewId", obj.newViewId);
-      json.Add("parentViewId", obj.parentViewId);
+      json.Add("command_type", "AddRectangle");
+      json.Add("new_view_id", obj.newViewId);
+      json.Add("parent_view_id", obj.parentViewId);
       json.Add("x", obj.x);
       json.Add("y", obj.y);
       json.Add("width", obj.width);
       json.Add("height", obj.height);
       json.Add("z", obj.z);
       json.Add("color", obj.color.ToJson());
-      json.Add("borderColor", obj.borderColor.ToJson());
+      json.Add("border_color", obj.borderColor.ToJson());
       return json;
     }
 
     public static JSONObject ToJson(this AddSymbolMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "AddSymbol");
-      json.Add("newViewId", obj.newViewId);
-      json.Add("parentViewId", obj.parentViewId);
+      json.Add("command_type", "AddSymbol");
+      json.Add("new_view_id", obj.newViewId);
+      json.Add("parent_view_id", obj.parentViewId);
       json.Add("x", obj.x);
       json.Add("y", obj.y);
       json.Add("size", obj.size);
       json.Add("z", obj.z);
       json.Add("color", obj.color.ToJson());
-      json.Add("symbolId", obj.symbolId.ToJson());
+      json.Add("symbol_id", obj.symbolId.ToJson());
       json.Add("centered", obj.centered);
       return json;
     }
 
     public static JSONObject ToJson(this ScheduleCloseMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "ScheduleClose");
-      json.Add("viewId", obj.viewId);
-      json.Add("startMsFromNow", obj.startMsFromNow);
+      json.Add("command_type", "ScheduleClose");
+      json.Add("view_id", obj.viewId);
+      json.Add("start_ms_from_now", obj.startMsFromNow);
       return json;
     }
 
     public static JSONObject ToJson(this SetElevationMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "SetElevation");
-      json.Add("tileId", obj.tileViewId);
+      json.Add("command_type", "SetElevation");
+      json.Add("tile_id", obj.tileViewId);
       json.Add("elevation", obj.elevation);
       return json;
     }
 
     public static JSONObject ToJson(this SetOverlayMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "SetOverlay");
-      json.Add("tileId", obj.tileId);
+      json.Add("command_type", "SetOverlay");
+      json.Add("tile_id", obj.tileId);
       json.Add("symbol", obj.symbol.ToJson());
       return json;
     }
 
     public static JSONObject ToJson(this FadeIn obj) {
       var json = new JSONObject();
-      json.Add("command", "SetFadeIn");
-      json.Add("fadeInStartTimeMs", obj.fadeInStartTimeMs);
-      json.Add("fadeInEndTimeMs", obj.fadeInEndTimeMs);
+      json.Add("command_type", "SetFadeIn");
+      json.Add("fade_in_start_time_ms", obj.fadeInStartTimeMs);
+      json.Add("fade_in_end_time_ms", obj.fadeInEndTimeMs);
       return json;
     }
 
     public static JSONObject ToJson(this FadeOut obj) {
       var json = new JSONObject();
-      json.Add("command", "SetFadeOut");
-      json.Add("fadeOutStartTimeMs", obj.fadeOutStartTimeMs);
-      json.Add("fadeOutEndTimeMs", obj.fadeOutEndTimeMs);
+      json.Add("command_type", "SetFadeOut");
+      json.Add("fade_out_start_time_ms", obj.fadeOutStartTimeMs);
+      json.Add("fade_out_end_time_ms", obj.fadeOutEndTimeMs);
       return json;
     }
 
     public static JSONObject ToJson(this SetFadeInMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "SetFadeIn");
+      json.Add("command_type", "SetFadeIn");
       json.Add("id", obj.id);
-      json.Add("fadeIn", obj.fadeIn.ToJson());
+      json.Add("fade_in", obj.fadeIn.ToJson());
       return json;
     }
 
     public static JSONObject ToJson(this SetFadeOutMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "SetFadeOut");
+      json.Add("command_type", "SetFadeOut");
       json.Add("id", obj.id);
-      json.Add("fadeOut", obj.fadeOut.ToJson());
+      json.Add("fade_out", obj.fadeOut.ToJson());
       return json;
     }
 
     public static JSONObject ToJson(this RemoveViewMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "RemoveView");
-      json.Add("viewId", obj.viewId);
+      json.Add("command_type", "RemoveView");
+      json.Add("view_id", obj.viewId);
       return json;
     }
 
     public static JSONObject ToJson(this CreateUnitMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "CreateUnit");
-      json.Add("unitId", obj.id);
-      json.Add("initialUnit", obj.initialUnit.ToJson());
+      json.Add("command_type", "CreateUnit");
+      json.Add("unit_id", obj.id);
+      json.Add("initial_unit", obj.initialUnit.ToJson());
       return json;
     }
 
     public static JSONObject ToJson(this DestroyUnitMessage obj) {
       var json = new JSONObject();
-      json.Add("command", "DestroyUnit");
-      json.Add("unitId", obj.unitId);
+      json.Add("command_type", "DestroyUnit");
+      json.Add("unit_id", obj.unitId);
       return json;
     }
 
